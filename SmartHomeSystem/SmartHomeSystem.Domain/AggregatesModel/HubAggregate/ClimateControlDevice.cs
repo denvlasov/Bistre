@@ -29,5 +29,10 @@ namespace SmartHomeSystem.Domain.AggregatesModel.HubAggregate
             base.Reset();
             Temperature = DefaultTemperature;
         }
+
+        protected override string GetDeviceInfo()
+        {
+            return base.GetDeviceInfo() + $"; Temperature: {Temperature}C";
+        }
     }
 }

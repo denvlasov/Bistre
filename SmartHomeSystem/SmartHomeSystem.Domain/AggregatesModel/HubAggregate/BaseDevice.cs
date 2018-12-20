@@ -40,9 +40,19 @@ namespace SmartHomeSystem.Domain.AggregatesModel.HubAggregate
             Name = name;
         }
 
+        public string GetState()
+        {
+            return GetDeviceInfo();
+        }
+
         protected virtual void Reset()
         {
             IsTurnedOn = false;
+        }
+
+        protected virtual string GetDeviceInfo()
+        {
+            return $"Device Code: {DeviceCode}; Name: {Name}; Is Turned ON: {IsTurnedOn}";
         }
     }
 }

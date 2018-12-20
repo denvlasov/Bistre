@@ -30,5 +30,10 @@ namespace SmartHomeSystem.Domain.AggregatesModel.HubAggregate
             base.Reset();
             LightingIntensityPercent = DefaultLightingIntensityPercent;
         }
+
+        protected override string GetDeviceInfo()
+        {
+            return base.GetDeviceInfo() + $"; Lighting Intensity: {LightingIntensityPercent}%";
+        }
     }
 }

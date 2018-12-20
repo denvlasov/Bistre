@@ -1,8 +1,8 @@
 ﻿using SmartHomeSystem.Domain.AggregatesModel.HubAggregate;
-using SmartHomeSystem.Domain.Factories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity;
 
 namespace SmartHomeSystem
 {
@@ -10,19 +10,20 @@ namespace SmartHomeSystem
     {
         static void Main(string[] args)
         {
-            //Example of usage
-            var lightingDeviceFactory = new LightingControlDeviceFactory();
-            var humidifierDeviceFactory = new HumidifierDeviceFactory();
-            var climateDeviceFactory = new ClimateControlDeviceFactory();
+
+            IUnityContainer container = new UnityContainer()
+                .RegisterType<IClimateControlDevice, ClimateControlDevice>()
+                .RegisterType<IHumidifierDevice, HumidifierDevice>()
+                .RegisterType<ILightingControlDevice, LightingControlDevice>();
 
             var devices = new List<IBaseDevice>() {
-                lightingDeviceFactory.Create(1, "111xIndustryCode", "Light Room"),
-                lightingDeviceFactory.Create(2, "112xIndustryCode", "Light Kitchen"),
-                lightingDeviceFactory.Create(3, "113xIndustryCode", "Light Bathroom"),
-                humidifierDeviceFactory.Create(4, "211xIndustryCode", "Humidier Room"),
-                humidifierDeviceFactory.Create(5, "212xIndustryCode", "Humidier Kitchen"),
-                climateDeviceFactory.Create(6, "311xIndustryCode", "Climate Room"),
-                climateDeviceFactory.Create(7, "312xIndustryCode", "Climate Kitchen")
+                new LightingControlDevice(1, "111xIndustryCode", "Light Room"),
+                new LightingControlDevice(2, "112xIndustryCode", "Light Kitchen"),
+                new LightingControlDevice(3, "113xIndustryCode", "Light Bathroom"),
+                new HumidifierDevice(4, "211xIndustryCode", "Humidier Room"),
+                new HumidifierDevice(5, "212xIndustryCode", "Humidier Kitchen"),
+                new ClimateControlDevice(6, "311xIndustryCode", "Climate Room"),
+                new ClimateControlDevice(7, "312xIndustryCode", "Climate Kitchen")
             };
 
             var hub = new Hub("44 Ridge Ave Bloomfield, NJ 07002 USA");

@@ -29,5 +29,10 @@ namespace SmartHomeSystem.Domain.AggregatesModel.HubAggregate
             base.Reset();
             AirHumidityPercent = DefaultHumidityPercent;
         }
+
+        protected override string GetDeviceInfo()
+        {
+            return base.GetDeviceInfo() + $"; Air Humidity: {AirHumidityPercent}%";
+        }
     }
 }
