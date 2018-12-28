@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>net471</TargetFramework>
+    <ApplicationIcon />
+    <Win32Resource />
+    <OutputType>Library</OutputType>
+    <StartupObject />
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Unity" Version="5.8.11" />
-  </ItemGroup>
 
 </Project>

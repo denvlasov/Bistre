@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2041
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartHomeSystem", "SmartHomeSystem\SmartHomeSystem.csproj", "{F8D726FA-E740-4D21-82C4-A697F4C376A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartHomeSystem", "SmartHomeSystem\SmartHomeSystem.csproj", "{F8D726FA-E740-4D21-82C4-A697F4C376A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartHomeSystem.Domain", "SmartHomeSystem.Domain\SmartHomeSystem.Domain.csproj", "{B243C2E4-0B31-4756-905E-2FCE724FE47C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartHomeSystem.Domain", "SmartHomeSystem.Domain\SmartHomeSystem.Domain.csproj", "{B243C2E4-0B31-4756-905E-2FCE724FE47C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartHomeSystem.WebAPI", "SmartHomeSystem.WebAPI\SmartHomeSystem.WebAPI.csproj", "{7A7CCAB5-B6CF-40B2-AA4F-665B7DD4435B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebJobHub", "WebJobHub\WebJobHub.csproj", "{E7F11389-9E35-4CEE-8855-01A322FCA01B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{B243C2E4-0B31-4756-905E-2FCE724FE47C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B243C2E4-0B31-4756-905E-2FCE724FE47C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B243C2E4-0B31-4756-905E-2FCE724FE47C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A7CCAB5-B6CF-40B2-AA4F-665B7DD4435B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A7CCAB5-B6CF-40B2-AA4F-665B7DD4435B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A7CCAB5-B6CF-40B2-AA4F-665B7DD4435B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A7CCAB5-B6CF-40B2-AA4F-665B7DD4435B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7F11389-9E35-4CEE-8855-01A322FCA01B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7F11389-9E35-4CEE-8855-01A322FCA01B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7F11389-9E35-4CEE-8855-01A322FCA01B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7F11389-9E35-4CEE-8855-01A322FCA01B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
