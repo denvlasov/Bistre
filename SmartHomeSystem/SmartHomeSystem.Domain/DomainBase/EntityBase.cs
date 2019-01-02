@@ -1,6 +1,6 @@
 ﻿namespace SmartHomeSystem.Domain.DomainBase
 {
-    public abstract class EntityBase
+    public abstract class EntityBase : IEntity
     {
         public int Id { get; protected set; }
 

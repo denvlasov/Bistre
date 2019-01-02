@@ -1,5 +1,7 @@
-﻿using SmartHomeSystem.Domain.DomainBase;
+﻿using SmartHomeSystem.Domain.AggregatesModel.HubAggregate.Commands;
+using SmartHomeSystem.Domain.DomainBase;
 using System;
+using System.Collections.Generic;
 
 namespace SmartHomeSystem.Domain.AggregatesModel.HubAggregate
 {
@@ -40,6 +42,11 @@ namespace SmartHomeSystem.Domain.AggregatesModel.HubAggregate
             Name = name;
         }
 
+        public IEnumerable<string> GetCommands()
+        {
+            return GetDeviceCommands();
+        }
+
         public string GetState()
         {
             return GetDeviceInfo();
@@ -53,6 +60,17 @@ namespace SmartHomeSystem.Domain.AggregatesModel.HubAggregate
         protected virtual string GetDeviceInfo()
         {
             return $"Device Code: {DeviceCode}; Name: {Name}; Is Turned ON: {IsTurnedOn}";
+        }
+
+        protected virtual List<string> GetDeviceCommands()
+        {
+            return new List<string>()
+            {
+                CommandNameConstants.GetDeviceState,
+                CommandNameConstants.RebootDevice,
+                CommandNameConstants.RegisterDevice,
+                CommandNameConstants.SetDeviceName
+            };
         }
     }
 }

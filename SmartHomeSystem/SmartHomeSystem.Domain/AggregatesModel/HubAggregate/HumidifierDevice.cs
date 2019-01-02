@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SmartHomeSystem.Domain.AggregatesModel.HubAggregate.Commands;
+using System;
+using System.Collections.Generic;
 
 namespace SmartHomeSystem.Domain.AggregatesModel.HubAggregate
 {
@@ -33,6 +35,13 @@ namespace SmartHomeSystem.Domain.AggregatesModel.HubAggregate
         protected override string GetDeviceInfo()
         {
             return base.GetDeviceInfo() + $"; Air Humidity: {AirHumidityPercent}%";
+        }
+
+        protected override List<string> GetDeviceCommands()
+        {
+            var commands = base.GetDeviceCommands();
+            commands.Add(CommandNameConstants.SetAirHumidityPercent);
+            return commands;
         }
     }
 }

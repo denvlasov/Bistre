@@ -1,7 +1,7 @@
 ﻿namespace SmartHomeSystem.Domain.DomainBase
 {
-    public interface ICommand
+    public interface IEntity
     {
-        void Execute();
+        int Id { get; }
     }
 }
