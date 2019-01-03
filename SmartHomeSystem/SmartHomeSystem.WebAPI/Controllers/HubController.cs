@@ -1,5 +1,6 @@
 ﻿using SmartHomeSystem.Domain.AggregatesModel.HubAggregate;
 using SmartHomeSystem.Domain.AggregatesModel.HubAggregate.Commands;
+using Swashbuckle.Swagger.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,9 @@ namespace SmartHomeSystem.WebAPI.Controllers
     {
         [HttpGet]
         [Route("hubs/")]
+        [SwaggerOperation("GetAllHubs")]
+        [SwaggerResponse(HttpStatusCode.OK)]
+        [SwaggerResponse(HttpStatusCode.NotFound)]
         public IEnumerable<Hub> GetAllHubs()
         {
             //Retrieve from DB
@@ -21,6 +25,9 @@ namespace SmartHomeSystem.WebAPI.Controllers
 
         [HttpGet]
         [Route("hubs/{hubId}")]
+        [SwaggerOperation("GetHubById")]
+        [SwaggerResponse(HttpStatusCode.OK)]
+        [SwaggerResponse(HttpStatusCode.NotFound)]
         public Hub GetHub(int hubId)
         {
             //Retrieve hub from DB
@@ -30,6 +37,9 @@ namespace SmartHomeSystem.WebAPI.Controllers
 
         [HttpGet]
         [Route("hubs/{hubId}/devices/")]
+        [SwaggerOperation("GetAllDevices")]
+        [SwaggerResponse(HttpStatusCode.OK)]
+        [SwaggerResponse(HttpStatusCode.NotFound)]
         public IEnumerable<IBaseDevice> GetHubDevices(int hubId)
         {
             //Retrieve hub from DB
@@ -40,6 +50,9 @@ namespace SmartHomeSystem.WebAPI.Controllers
 
         [HttpPut]
         [Route("hubs/{hubId}/devices/{deviceId}/Registration")]
+        [SwaggerOperation("RegisterDevice")]
+        [SwaggerResponse(HttpStatusCode.OK)]
+        [SwaggerResponse(HttpStatusCode.NotFound)]
         public void RegisterDeviceToHub(int hubId, int deviceId)
         {
             //Retrieve hub and device from DB
@@ -48,12 +61,12 @@ namespace SmartHomeSystem.WebAPI.Controllers
             // Get Device: var devices = 
             hub.AddDevice(device);
         }
-        /*
-        [HttpPut]
-        [Route("hubs/{hubId}/devices/{deviceId}")]
-        */
+
         [HttpGet]
         [Route("hubs/{hubId}/devices/{deviceId}/State")]
+        [SwaggerOperation("GetDeviceState")]
+        [SwaggerResponse(HttpStatusCode.OK)]
+        [SwaggerResponse(HttpStatusCode.NotFound)]
         public string GetDeviceState(int hubId, int deviceId)
         {
             return RetrieveDeviceState(hubId, deviceId);
@@ -61,6 +74,9 @@ namespace SmartHomeSystem.WebAPI.Controllers
 
         [HttpGet]
         [Route("hubs/{hubId}/devices/{deviceId}/Commands")]
+        [SwaggerOperation("GetDeviceCommands")]
+        [SwaggerResponse(HttpStatusCode.OK)]
+        [SwaggerResponse(HttpStatusCode.NotFound)]
         public IEnumerable<string> GetDeviceCommands(int hubId, int deviceId)
         {
             //Retrieve hub and device from DB
@@ -72,6 +88,10 @@ namespace SmartHomeSystem.WebAPI.Controllers
 
         [HttpPost]
         [Route("hubs/{hubId}/devices/{deviceId}/Commands/{name}")]
+        [SwaggerOperation("ExecuteCommand")]
+        [SwaggerResponse(HttpStatusCode.OK)]
+        [SwaggerResponse(HttpStatusCode.NotFound)]
+        [SwaggerResponse(HttpStatusCode.MethodNotAllowed)]
         public HttpResponseMessage ExecuteCommand(int hubId, int deviceId, string name, [FromBody]object args)
         {
             //var device = new object(); //
