@@ -11,7 +11,6 @@ namespace SmartHomeSystem.WebAPI.Controllers
 {
     public class HubController : ApiController
     {
-        //Return 405 (method not allowed), values and other controllers - not needed
         [HttpGet]
         [Route("hubs/")]
         public IEnumerable<Hub> GetAllHubs()
@@ -57,11 +56,7 @@ namespace SmartHomeSystem.WebAPI.Controllers
         [Route("hubs/{hubId}/devices/{deviceId}/State")]
         public string GetDeviceState(int hubId, int deviceId)
         {
-            //Retrieve hub and device from DB
-            var hubs = new List<Hub>() { new Hub("Hub1") };
-            var hub = hubs.Where(h => h.Id == hubId).First();
-            var device = hub.Devices.Where(d => d.Id == deviceId).First();
-            return device.GetState();
+            return RetrieveDeviceState(hubId, deviceId);
         }
 
         [HttpGet]
@@ -83,28 +78,45 @@ namespace SmartHomeSystem.WebAPI.Controllers
             var hubs = new List<Hub>() { new Hub("Hub1") };
             var hub = hubs.Where(h => h.Id == hubId).First();
             var device = hub.Devices.Where(d => d.Id == deviceId).First();
-            if !(device.GetCommands().Contains(name, IgnoreCase))
-                { }
+            if (!device.GetCommands().Contains(name.ToUpper()))
+            {
+                return new HttpResponseMessage(HttpStatusCode.MethodNotAllowed);
+            }
+            
             switch (name)
             {
                 case CommandNameConstants.GetDeviceState:
-                    break;
+                    return Request.CreateResponse(HttpStatusCode.OK, RetrieveDeviceState(hubId, deviceId));
                 case CommandNameConstants.RebootDevice:
-                    break;
+                    device.Reboot();
+                    return new HttpResponseMessage(HttpStatusCode.OK);
                 case CommandNameConstants.RegisterDevice:
-                    break;
-                case CommandNameConstants.SetAirHumidityPercent:
-                    break;
+                    device.Register(hub);
+                    return new HttpResponseMessage(HttpStatusCode.OK);
                 case CommandNameConstants.SetDeviceName:
-                    break;
+                    device.SetName((string)args);
+                    return new HttpResponseMessage(HttpStatusCode.OK);
+                case CommandNameConstants.SetAirHumidityPercent:
+                    ((IHumidifierDevice)device).SetAirHumidityPercent((int)args);
+                    return new HttpResponseMessage(HttpStatusCode.OK);
                 case CommandNameConstants.SetLightingIntensityPercent:
-                    break;
+                    ((ILightingControlDevice)device).SetLightingIntensityPercent((int)args);
+                    return new HttpResponseMessage(HttpStatusCode.OK);
                 case CommandNameConstants.SetTemperature:
-                    break;
+                    ((IClimateControlDevice)device).SetTemperature((int)args);
+                    return new HttpResponseMessage(HttpStatusCode.OK);
                 default:
                     return new HttpResponseMessage(HttpStatusCode.NotFound);
             }
         }
 
+        private string RetrieveDeviceState(int hubId, int deviceId)
+        {
+            //Retrieve hub and device from DB
+            var hubs = new List<Hub>() { new Hub("Hub1") };
+            var hub = hubs.Where(h => h.Id == hubId).First();
+            var device = hub.Devices.Where(d => d.Id == deviceId).First();
+            return device.GetState();
+        }
     }
 }
