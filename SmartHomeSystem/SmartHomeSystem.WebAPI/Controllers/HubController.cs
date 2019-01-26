@@ -1,12 +1,14 @@
 ﻿using SmartHomeSystem.Domain.AggregatesModel.HubAggregate;
 using SmartHomeSystem.Domain.AggregatesModel.HubAggregate.Commands;
+using SmartHomeSystem.DAL.DataModels;
 using Swashbuckle.Swagger.Annotations;
-using System;
+using System.Net;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
+using Hub = SmartHomeSystem.DAL.DataModels.Hub;
 
 namespace SmartHomeSystem.WebAPI.Controllers
 {
@@ -17,10 +19,9 @@ namespace SmartHomeSystem.WebAPI.Controllers
         [SwaggerOperation("GetAllHubs")]
         [SwaggerResponse(HttpStatusCode.OK)]
         [SwaggerResponse(HttpStatusCode.NotFound)]
-        public IEnumerable<Hub> GetAllHubs()
+        public async Task<IEnumerable<Hub>> GetAllHubs()
         {
-            //Retrieve from DB
-            return new List<Hub>() { new Hub("Hub1") };
+            return await DocumentDBRepository<Hub>.GetItemsAsync(null);
         }
 
         [HttpGet]
@@ -28,11 +29,9 @@ namespace SmartHomeSystem.WebAPI.Controllers
         [SwaggerOperation("GetHubById")]
         [SwaggerResponse(HttpStatusCode.OK)]
         [SwaggerResponse(HttpStatusCode.NotFound)]
-        public Hub GetHub(int hubId)
+        public async Task<Hub> GetHub(int hubId)
         {
-            //Retrieve hub from DB
-            var hubs = new List<Hub>() { new Hub("Hub1") };
-            return hubs.Where(h => h.Id == hubId).First();
+            return await DocumentDBRepository<Hub>.GetItemAsync(hubId.ToString());
         }
 
         [HttpGet]

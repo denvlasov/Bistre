@@ -14,7 +14,7 @@ public static class DocumentDBRepository<T> where T : class
     private static readonly string CollectionId = ConfigurationManager.AppSettings["collection"];
     private static DocumentClient client;
 
-    public static async Task<T> GetItemAsync(string id, string category)
+    public static async Task<T> GetItemAsync(string id)
     {
         try
         {

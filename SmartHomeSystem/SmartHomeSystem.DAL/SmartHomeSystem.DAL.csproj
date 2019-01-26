@@ -101,6 +101,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataModels\Device.cs" />
+    <Compile Include="DataModels\Hub.cs" />
     <Compile Include="DocumentDBRepostitory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
